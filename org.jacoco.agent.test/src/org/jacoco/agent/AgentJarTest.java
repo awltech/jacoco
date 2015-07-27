@@ -22,6 +22,7 @@ import java.util.jar.Manifest;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import org.jacoco.javaagent.AgentJar;
 import org.junit.After;
 import org.junit.Test;
 

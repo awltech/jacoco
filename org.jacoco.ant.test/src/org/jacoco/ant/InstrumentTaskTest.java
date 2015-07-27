@@ -18,7 +18,7 @@ import junit.framework.TestSuite;
 
 import org.apache.ant.antunit.junit3.AntUnitSuite;
 import org.apache.ant.antunit.junit4.AntUnitSuiteRunner;
-import org.jacoco.agent.AgentJar;
+import org.jacoco.javaagent.AgentJar;
 import org.junit.runner.RunWith;
 
 @RunWith(AntUnitSuiteRunner.class)

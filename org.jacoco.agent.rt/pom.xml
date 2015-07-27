@@ -15,8 +15,8 @@
   <parent>
     <groupId>org.jacoco</groupId>
     <artifactId>org.jacoco.build</artifactId>
-    <version>0.7.2.201409121644</version>
     <relativePath>../org.jacoco.build</relativePath>
+    <version>0.7.2.201409121644</version>
   </parent>
 
   <artifactId>org.jacoco.agent.rt</artifactId>

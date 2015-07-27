@@ -16,8 +16,8 @@ import java.io.IOException;
 
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
-import org.jacoco.agent.AgentJar;
 import org.jacoco.core.runtime.AgentOptions;
+import org.jacoco.javaagent.AgentJar;
 
 /**
  * Base class for all coverage tasks that require agent options

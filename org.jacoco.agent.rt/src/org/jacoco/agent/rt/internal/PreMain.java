@@ -39,7 +39,8 @@ public final class PreMain {
 	 */
 	public static void premain(final String options, final Instrumentation inst)
 			throws Exception {
-
+		System.out
+				.println("[JACOCO] LOADING AGENT V1 - This is the modified version of Jacoco for running the experiements");
 		final AgentOptions agentOptions = new AgentOptions(options);
 
 		final Agent agent = Agent.getInstance(agentOptions);
@@ -48,6 +49,7 @@ public final class PreMain {
 		runtime.startup(agent.getData());
 		inst.addTransformer(new CoverageTransformer(runtime, agentOptions,
 				IExceptionLogger.SYSTEM_ERR));
+		System.out.println("[JACOCO] AGENT LOADED V1 !!!!!");
 	}
 
 	private static IRuntime createRuntime(final Instrumentation inst)
