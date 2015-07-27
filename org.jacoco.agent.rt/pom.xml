@@ -16,7 +16,7 @@
     <groupId>org.jacoco</groupId>
     <artifactId>org.jacoco.build</artifactId>
     <relativePath>../org.jacoco.build</relativePath>
-    <version>0.7.2.201409121644</version>
+    <version>42.42.42.0-SNAPSHOT</version>
   </parent>
 
   <artifactId>org.jacoco.agent.rt</artifactId>
