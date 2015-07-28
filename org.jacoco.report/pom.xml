@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-   Copyright (c) 2009, 2014 Mountainminds GmbH & Co. KG and Contributors
-   All rights reserved. This program and the accompanying materials
-   are made available under the terms of the Eclipse Public License v1.0
-   which accompanies this distribution, and is available at
-   http://www.eclipse.org/legal/epl-v10.html
-
-   Contributors:
-      Evgeny Mandrikov - initial API and implementation
--->
+<!-- Copyright (c) 2009, 2014 Mountainminds GmbH & Co. KG and Contributors 
+	All rights reserved. This program and the accompanying materials are made 
+	available under the terms of the Eclipse Public License v1.0 which accompanies 
+	this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html 
+	Contributors: Evgeny Mandrikov - initial API and implementation -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
@@ -16,7 +11,7 @@
 	<parent>
 		<groupId>org.jacoco</groupId>
 		<artifactId>org.jacoco.build</artifactId>
-		<version>42.42.42.0-SNAPSHOT</version>
+		<version>0.0.42-EXPERIMENTAL-SNAPSHOT</version>
 		<relativePath>../org.jacoco.build</relativePath>
 	</parent>
 
@@ -42,33 +37,43 @@
 
 	<build>
 		<sourceDirectory>src</sourceDirectory>
+
+		<plugins>
+			<!-- packaging de l'application -->
+			<plugin>
+				<!-- NOTE: We don't need a groupId specification because the group is 
+					org.apache.maven.plugins ...which is assumed by default. -->
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.5.5</version>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+					<descriptors>
+						<descriptor>src/main/assembly/jar.xml</descriptor>
+					</descriptors>
+					<archive>
+						<manifest>
+							<mainClass>aa.worldline.vbu.jacoco.reportGenerator.ReportGenerator</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+				<executions>
+					<execution>
+						<id>executable</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
 	</build>
-	<profiles>
-		<profile>
-			<id>report-generator</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>exec-maven-plugin</artifactId>
-						<version>1.1.1</version>
-						<executions>
-							<execution>
-								<phase>test</phase>
-								<goals>
-									<goal>java</goal>
-								</goals>
-								<configuration>
-									<mainClass>aa.worldline.vbu.jacoco.reportGenerator.ReportGenerator</mainClass>
-									<arguments>
-										<argument>${moduleLocation}</argument>
-									</arguments>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
+	<!-- <profiles> <profile> <id>report-generator</id> <build> <plugins> <plugin> 
+		<groupId>org.codehaus.mojo</groupId> <artifactId>exec-maven-plugin</artifactId> 
+		<version>1.1.1</version> <executions> <execution> <phase>test</phase> <goals> 
+		<goal>java</goal> </goals> <configuration> <mainClass>aa.worldline.vbu.jacoco.reportGenerator.ReportGenerator</mainClass> 
+		<arguments> <argument>${moduleLocation}</argument> </arguments> </configuration> 
+		</execution> </executions> </plugin> </plugins> </build> </profile> </profiles> -->
 </project>

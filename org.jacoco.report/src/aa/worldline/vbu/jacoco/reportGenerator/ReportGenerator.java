@@ -43,7 +43,7 @@ public class ReportGenerator {
 	private final File reportDirectory;
 	private final String reportFileName;
 
-	static String root = "C:/Data/Cedicam/WS/git/wlp-product-master-pom/wlp-product-test/";
+	static String root;
 
 	// String classDir =
 	// "C:/Data/Cedicam/mavenrepo/net/atos/wlp/cedicam/opc/wlp-cedicam-opc-provider/5.5.2.024.022-SNAPSHOT/wlp-cedicam-opc-provider-5.5.2.024.022-SNAPSHOT.jar";
@@ -59,12 +59,13 @@ public class ReportGenerator {
 	 */
 	public ReportGenerator(final File projectDirectory, final String execFile) {
 		this.title = projectDirectory.getName();
-		this.executionDataFile = new File(projectDirectory, "EXEC Coverage/"
+		this.executionDataFile = new File(projectDirectory, "/EXEC_REPORTS/"
 				+ execFile);
 		// this.classesDirectory = new File(classDir);
 		this.sourceDirectory = new File(projectDirectory, sources);
 		reportFileName = execFile;
-		this.reportDirectory = new File(projectDirectory, execFile + ".xml");
+		this.reportDirectory = new File(projectDirectory, "/XML_REPORTS/");
+		this.reportDirectory.mkdir();
 	}
 
 	/**
@@ -98,7 +99,7 @@ public class ReportGenerator {
 		final XMLFormatter xmlFormatter = new XMLFormatter();
 		final IReportVisitor visitor = xmlFormatter
 				.createVisitor(new BufferedOutputStream(new FileOutputStream(
-						root + reportFileName + ".xml")));
+						root + "/XML_REPORTS/" + reportFileName + ".xml")));
 
 		// Initialize the report with all of the execution and session
 		// information. At this point the report doesn't know about the
@@ -136,6 +137,12 @@ public class ReportGenerator {
 		 * log("Empty or invalid line. Unable to process."); } }
 		 */
 		final File cp = new File(root, classpath);
+		if (!cp.exists()) {
+			System.out
+					.println("Jacoco report: the file .classpath.cp doesn't exists!!");
+			System.exit(10);
+		}
+		;
 		Scanner aScanner = null;
 		try {
 			aScanner = new Scanner(cp).useDelimiter(";");
@@ -169,10 +176,12 @@ public class ReportGenerator {
 		// in classpath.cp the classpath used to build the application
 		// in src the sources of the programm
 		// The results will be published in XML_REPORTS
-		final String path = root;
-		for (final File f : new File(path + "EXEC Coverage").listFiles()) {
+		System.out.println("Jacoco report: Begin treatment");
+		root = args[0];
+		System.out.println("Jacoco report: The directory used is:" + root);
+		for (final File f : new File(root + "/EXEC_REPORTS").listFiles()) {
 			final ReportGenerator generator = new ReportGenerator(
-					new File(path), f.getName());
+					new File(root), f.getName());
 			generator.create();
 		}
 	}
