@@ -152,7 +152,7 @@ public class ReportGenerator {
 					analyzer.analyzeAll(new File(jar));
 				} catch (final IOException e) {
 					// next item
-					System.out.println("Bypass " + jar);
+					System.out.println("Bypass " + jar + "-" + e.getMessage());
 				}
 			}
 		} finally {
