@@ -152,7 +152,8 @@ public class ReportGenerator {
 					analyzer.analyzeAll(new File(jar));
 				} catch (final IOException e) {
 					// next item
-					System.out.println("Bypass " + jar + "-" + e.getMessage());
+					System.out.println("[Jacoco report]Bypass " + jar + "-"
+							+ e.getMessage());
 				}
 			}
 		} finally {
@@ -176,10 +177,11 @@ public class ReportGenerator {
 		// in classpath.cp the classpath used to build the application
 		// in src the sources of the programm
 		// The results will be published in XML_REPORTS
-		System.out.println("Jacoco report: Begin treatment");
+		System.out.println("[Jacoco report]Begin treatment");
 		root = args[0];
-		System.out.println("Jacoco report: The directory used is:" + root);
+		System.out.println("[Jacoco report]The directory used is:" + root);
 		for (final File f : new File(root + "/EXEC_REPORTS").listFiles()) {
+			System.out.println("[Jacoco report]File:" + f);
 			final ReportGenerator generator = new ReportGenerator(
 					new File(root), f.getName());
 			generator.create();
