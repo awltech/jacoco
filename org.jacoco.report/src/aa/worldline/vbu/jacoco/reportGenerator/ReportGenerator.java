@@ -38,7 +38,7 @@ public class ReportGenerator {
 	private final String title;
 
 	private final File executionDataFile;
-	// private final File classesDirectory;
+	private final File classesDirectory;
 	private final File sourceDirectory;
 	private final File reportDirectory;
 	private final String reportFileName;
@@ -49,6 +49,8 @@ public class ReportGenerator {
 	// "C:/Data/Cedicam/mavenrepo/net/atos/wlp/cedicam/opc/wlp-cedicam-opc-provider/5.5.2.024.022-SNAPSHOT/wlp-cedicam-opc-provider-5.5.2.024.022-SNAPSHOT.jar";
 	String sources = "src";
 	String classpath = "classpath.cp";
+	String compiledClasses = "target";
+
 	private ExecFileLoader execFileLoader;
 
 	/**
@@ -61,7 +63,7 @@ public class ReportGenerator {
 		this.title = projectDirectory.getName();
 		this.executionDataFile = new File(projectDirectory, "/EXEC_REPORTS/"
 				+ execFile);
-		// this.classesDirectory = new File(classDir);
+		this.classesDirectory = new File(projectDirectory, compiledClasses);
 		this.sourceDirectory = new File(projectDirectory, sources);
 		reportFileName = execFile;
 		this.reportDirectory = new File(projectDirectory, "/XML_REPORTS/");
@@ -159,6 +161,8 @@ public class ReportGenerator {
 		} finally {
 			aScanner.close();
 		}
+
+		analyzer.analyzeAll(classesDirectory);
 		return coverageBuilder.getBundle(title);
 	}
 
