@@ -145,7 +145,7 @@ public class ReportGenerator {
 		;
 		Scanner aScanner = null;
 		try {
-			aScanner = new Scanner(cp).useDelimiter(";");
+			aScanner = new Scanner(cp).useDelimiter(File.pathSeparator);
 			while (aScanner.hasNext()) {
 				final String jar = aScanner.next();
 				try {
