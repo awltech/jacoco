@@ -154,7 +154,7 @@ public class ReportGenerator {
 					analyzer.analyzeAll(new File(jar));
 				} catch (final IOException e) {
 					// next item
-					System.out.println("[Jacoco report]Bypass " + jar + "-"
+					System.out.println("[Jacoco error]Bypass " + jar + "-"
 							+ e.getMessage());
 				}
 			}

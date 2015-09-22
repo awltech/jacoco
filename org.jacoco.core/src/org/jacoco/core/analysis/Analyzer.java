@@ -175,7 +175,19 @@ public class Analyzer {
 			analyzeClass(detector.getInputStream(), name);
 			return 1;
 		case ContentTypeDetector.ZIPFILE:
-			return analyzeZip(detector.getInputStream(), name);
+			try {
+				return analyzeZip(detector.getInputStream(), name);
+			} catch (final IllegalArgumentException e) {
+				// It exists zip files which not contains java class files but
+				// that are in the CP...
+				System.out.println("[Jacoco Error]" + name
+						+ " is not a valid zip file.");
+				return 0;
+			} catch (final IOException e) {
+				System.out.println("[Jacoco Error]" + name
+						+ " is not a valid zip file.");
+				return 0;
+			}
 		case ContentTypeDetector.GZFILE:
 			return analyzeGzip(detector.getInputStream(), name);
 		case ContentTypeDetector.PACK200FILE:
