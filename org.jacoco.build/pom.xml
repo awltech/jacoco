@@ -47,7 +47,7 @@
 		<module>../org.jacoco.agent</module>
 		<module>../org.jacoco.ant</module>
 		<!-- Not Needed for experimentation -->
-		<!-- <module>../jacoco-maven-plugin</module> -->
+		<module>../jacoco-maven-plugin</module>
 
 		<!-- <module>../org.jacoco.tests</module> -->
 
@@ -66,18 +66,11 @@
 		<url>https://github.com/jacoco/jacoco/issues</url>
 	</issueManagement>
 	<distributionManagement>
-	
-		<!-- <repository>
-			<id>sonatype-nexus-staging</id>
-			<name>Nexus Release Repository</name>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-		</repository>
-		<snapshotRepository>
-			<id>sonatype-nexus-snapshots</id>
-			<name>Sonatype Nexus Snapshots</name>
-			<url>${sonatypeOssDistMgmtSnapshotsUrl}</url>
-		</snapshotRepository>
- -->
+
+		<!-- <repository> <id>sonatype-nexus-staging</id> <name>Nexus Release Repository</name> 
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url> 
+			</repository> <snapshotRepository> <id>sonatype-nexus-snapshots</id> <name>Sonatype 
+			Nexus Snapshots</name> <url>${sonatypeOssDistMgmtSnapshotsUrl}</url> </snapshotRepository> -->
 		<repository>
 			<id>kazan-release-repo</id>
 			<name>CIP Kazan Repository for Maven2</name>
@@ -302,19 +295,14 @@
 					<artifactId>maven-plugin-plugin</artifactId>
 					<version>3.3</version>
 				</plugin>
-				<!-- <plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-release-plugin</artifactId>
-					<version>2.1</version>
-					<configuration>
-						<autoVersionSubmodules>true</autoVersionSubmodules>
-						<mavenExecutorId>forked-path</mavenExecutorId>
-						<useReleaseProfile>false</useReleaseProfile>-->
-						<!-- Allows to activate release profile during release. We don't use 
-							releaseProfiles parameter, because it affects only release:perform goal -->
-<!-- 						<arguments>-Prelease</arguments> -->
-<!-- 					</configuration> -->
-<!-- 				</plugin> -->
+				<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-release-plugin</artifactId> 
+					<version>2.1</version> <configuration> <autoVersionSubmodules>true</autoVersionSubmodules> 
+					<mavenExecutorId>forked-path</mavenExecutorId> <useReleaseProfile>false</useReleaseProfile> -->
+				<!-- Allows to activate release profile during release. We don't use 
+					releaseProfiles parameter, because it affects only release:perform goal -->
+				<!-- <arguments>-Prelease</arguments> -->
+				<!-- </configuration> -->
+				<!-- </plugin> -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-resources-plugin</artifactId>
@@ -445,7 +433,7 @@
 				</configuration>
 			</plugin>
 
-			
+
 
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -494,12 +482,15 @@
 							<source>
 								major = project.properties['parsedVersion.majorVersion']
 								minor = project.properties['parsedVersion.minorVersion']
-								incremental = project.properties['parsedVersion.incrementalVersion']
-								qualifier = "${maven.build.timestamp}"
+								incremental =
+								project.properties['parsedVersion.incrementalVersion']
+								qualifier
+								= "${maven.build.timestamp}"
 								project.properties['buildQualifier'] = qualifier
 								project.properties['unqualifiedVersion'] = major + '.' + minor +
 								'.' + incremental
-								project.properties['qualified.bundle.version'] = project.properties['unqualifiedVersion'] + '.' +
+								project.properties['qualified.bundle.version']
+								= project.properties['unqualifiedVersion'] + '.' +
 								project.properties['buildQualifier']
 								project.properties['build.date'] = qualifier.substring(0, 4) +
 								'/' + qualifier.substring(4, 6) + '/' + qualifier.substring(6,
