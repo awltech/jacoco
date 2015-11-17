@@ -116,6 +116,7 @@
 		<!-- See http://jira.codehaus.org/browse/SONAR-2096 -->
 		<sonar.java.source>1.5</sonar.java.source>
 		<sonar.java.target>1.5</sonar.java.target>
+		<jacoco.runtime.package.name>org.jacoco.agent.rt.internal_424242</jacoco.runtime.package.name>
 	</properties>
 
 	<dependencyManagement>
